@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/pages/home_page.dart';
 
 class BottomTab extends StatelessWidget {
   BottomTab({Key? key}) : super(key: key);
 
   // タブに連動して表示させたい画面のリスト
   final List<Widget> _pageWidgets = [
-    const Center(
-      child: Text("ホーム"),
-    ),
+    const HomePage(),
     const Center(
       child: Text("ユーザー"),
     ),
