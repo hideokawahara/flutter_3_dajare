@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/pages/man_details_page.dart';
 import 'package:flutter_3_dajare/widgets/button.dart';
 
 class HomePage extends StatelessWidget {
@@ -57,8 +58,32 @@ class HomePageBody extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: LikeButton(
-                    onTap: () {
+                    onTap: () async {
                       print("tap");
+                      BuildContext innerContext =
+                          context; // 内部の context を保持しておくためのもの
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          innerContext =
+                              context; // builder で使われている context を innerContext に保存しておく
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      );
+                      await Future.delayed(
+                        const Duration(
+                          milliseconds: 1000,
+                        ),
+                      );
+                      Navigator.of(innerContext).pop();
+                      Navigator.of(context, rootNavigator: true).push(
+                        MaterialPageRoute(
+                          builder: (_) => const ManDetailsPage(),
+                        ),
+                      );
                     },
                   ),
                 ),
