@@ -14,9 +14,14 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class HomePageBody extends StatelessWidget {
+class HomePageBody extends StatefulWidget {
   const HomePageBody({Key? key}) : super(key: key);
 
+  @override
+  State<HomePageBody> createState() => _HomePageBodyState();
+}
+
+class _HomePageBodyState extends State<HomePageBody> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -78,6 +83,7 @@ class HomePageBody extends StatelessWidget {
                           milliseconds: 1000,
                         ),
                       );
+                      if (!mounted) return;
                       Navigator.of(innerContext).pop();
                       Navigator.of(context, rootNavigator: true).push(
                         MaterialPageRoute(
