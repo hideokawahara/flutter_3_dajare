@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/pages/home_page.dart';
+import 'package:flutter_3_dajare/pages/message_list_page.dart';
 
 class BottomTab extends StatelessWidget {
   BottomTab({Key? key}) : super(key: key);
@@ -8,9 +9,7 @@ class BottomTab extends StatelessWidget {
   // タブに連動して表示させたい画面のリスト
   final List<Widget> _pageWidgets = [
     const HomePage(),
-    const Center(
-      child: Text("ユーザー"),
-    ),
+    const MessageListPage(),
     const Center(
       child: Text(
         "お気に入り",
@@ -30,8 +29,8 @@ class BottomTab extends StatelessWidget {
       label: 'ホーム',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.person),
-      label: 'ユーザー',
+      icon: Icon(Icons.messenger_outlined),
+      label: 'やりとり',
     ),
     const BottomNavigationBarItem(
       icon: Icon(Icons.favorite),
@@ -48,9 +47,9 @@ class BottomTab extends StatelessWidget {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         items: _tabItems,
-        activeColor: Colors.yellowAccent,
-        inactiveColor: Colors.white,
-        backgroundColor: Colors.blueGrey,
+        activeColor: Colors.black,
+        inactiveColor: Colors.grey,
+        backgroundColor: Colors.white,
         // 追加したプロパティを記述する
         height: 66,
       ),
