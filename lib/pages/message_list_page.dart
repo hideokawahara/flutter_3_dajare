@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/pages/chat_page.dart';
 
 class MessageListPage extends StatelessWidget {
   const MessageListPage({Key? key}) : super(key: key);
@@ -49,6 +50,13 @@ class MessageListPageBody extends StatelessWidget {
           ),
           subtitle: const Text("お茶しましょう"),
           trailing: const Text("8/12"),
+          onTap: () {
+            Navigator.of(context, rootNavigator: true).push(
+              MaterialPageRoute(
+                builder: (_) => const ChatPage(),
+              ),
+            );
+          },
         );
       },
     );

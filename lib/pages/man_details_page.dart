@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/button.dart';
+import 'chat_page.dart';
 
 class ManDetailsPage extends StatelessWidget {
   const ManDetailsPage({Key? key}) : super(key: key);
@@ -68,9 +69,17 @@ class ManDetailsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: GoToMessageButton(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: GoToMessageButton(
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).push(
+                        MaterialPageRoute(
+                          builder: (_) => const ChatPage(),
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 40,
