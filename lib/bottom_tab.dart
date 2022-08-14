@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/pages/favorite_list_page.dart';
 import 'package:flutter_3_dajare/pages/home_page.dart';
 import 'package:flutter_3_dajare/pages/message_list_page.dart';
 
@@ -15,11 +16,7 @@ class BottomTab extends StatelessWidget {
       icon: Icon(Icons.messenger_outlined),
       label: 'やりとり',
     ),
-    const Center(
-      child: Text(
-        "お気に入り",
-      ),
-    ): const BottomNavigationBarItem(
+    const FavoriteListPage(): const BottomNavigationBarItem(
       icon: Icon(Icons.favorite),
       label: 'お気に入り',
     ),
