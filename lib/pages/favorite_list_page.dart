@@ -41,7 +41,6 @@ class _FavoriteListPageBodyState extends State<FavoriteListPageBody> {
         itemCount: 6,
         itemBuilder: (BuildContext listContext, int index) {
           return Container(
-            // height: 100,
             width: 200,
             margin: const EdgeInsets.only(bottom: 16),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),

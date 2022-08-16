@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/pages/favorite_list_page.dart';
 import 'package:flutter_3_dajare/pages/home_page.dart';
 import 'package:flutter_3_dajare/pages/message_list_page.dart';
+import 'package:flutter_3_dajare/pages/my_page.dart';
 
 class BottomTab extends StatelessWidget {
   BottomTab({Key? key}) : super(key: key);
@@ -20,11 +21,7 @@ class BottomTab extends StatelessWidget {
       icon: Icon(Icons.favorite),
       label: 'お気に入り',
     ),
-    const Center(
-      child: Text(
-        "設定",
-      ),
-    ): const BottomNavigationBarItem(
+    const MyPage(): const BottomNavigationBarItem(
       icon: Icon(Icons.settings),
       label: '設定',
     ),
