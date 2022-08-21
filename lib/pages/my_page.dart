@@ -35,12 +35,30 @@ class MyPageBody extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          CircleAvatar(
-            backgroundImage: Image.network(
-              "https://pakutaso.cdn.rabify.me/shared/img/thumb/bakarizmPAR56935.jpg.webp?d=1420",
-              fit: BoxFit.cover,
-            ).image,
-            radius: 65,
+          Stack(
+            alignment: Alignment.bottomRight,
+            children: [
+              CircleAvatar(
+                backgroundImage: Image.network(
+                  "https://pakutaso.cdn.rabify.me/shared/img/thumb/yumikoPAR52492.jpg.webp?d=1420",
+                  fit: BoxFit.cover,
+                ).image,
+                radius: 65,
+              ),
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(color: Colors.white, width: 4),
+                ),
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
           const SizedBox(
             height: 16,
@@ -49,7 +67,7 @@ class MyPageBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               Text(
-                "タロー",
+                "チアキ",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
