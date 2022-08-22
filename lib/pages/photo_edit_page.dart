@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/pages/profile_preview_page.dart';
 
 class PhotoEditPage extends StatelessWidget {
   const PhotoEditPage({Key? key}) : super(key: key);
@@ -26,6 +27,24 @@ class PhotoEditPage extends StatelessWidget {
             color: Colors.black,
           ),
         ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const ProfilePreviewPage(),
+                ),
+              );
+            },
+            child: const Text(
+              'プレビュー',
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
       body: const PhotoEditPageBody(),
     );
