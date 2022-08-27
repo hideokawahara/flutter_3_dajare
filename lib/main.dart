@@ -19,7 +19,9 @@ class MainApp extends StatelessWidget {
       ],
       child: Builder(builder: (newContext) {
         return FutureBuilder<bool>(
-          future: Provider.of<AuthenticationViewModel>(newContext).login(),
+          future:
+              Provider.of<AuthenticationViewModel>(newContext, listen: false)
+                  .login(),
           builder: (_, snapshot) {
             final String initialRoute;
             if (snapshot.connectionState == ConnectionState.waiting) {
