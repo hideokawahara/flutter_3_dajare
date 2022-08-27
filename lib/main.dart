@@ -18,6 +18,22 @@ class MainApp extends StatelessWidget {
         ),
       ],
       child: Builder(builder: (newContext) {
+        bool isLogin =
+            Provider.of<AuthenticationViewModel>(newContext, listen: false)
+                .isLogin;
+        if (isLogin) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            initialRoute: '/home',
+            routes: {
+              '/home': (_) => BottomTab(),
+              '/login': (_) => const Center(child: Text('ログインしてね')),
+            },
+          );
+        }
         return FutureBuilder<bool>(
           future:
               Provider.of<AuthenticationViewModel>(newContext, listen: false)

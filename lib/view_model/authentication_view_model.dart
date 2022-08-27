@@ -7,10 +7,16 @@ class AuthenticationViewModel extends ChangeNotifier {
     return _myData;
   }
 
+  bool _isLogin = false;
+  bool get isLogin {
+    return _isLogin;
+  }
+
   Future<bool> login() async {
     await Future.delayed(const Duration(milliseconds: 1000));
     try {
       _myData = MyData.fromJSON(_dummyMyData);
+      _isLogin = true;
       return true;
     } on Exception {
       if (kDebugMode) {
