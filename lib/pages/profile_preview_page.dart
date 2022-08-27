@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/model/my_data.dart';
+import 'package:flutter_3_dajare/view_model/authentication_view_model.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePreviewPage extends StatelessWidget {
   const ProfilePreviewPage({Key? key}) : super(key: key);
@@ -37,6 +40,12 @@ class ProfilePreviewPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MyData? myData =
+        Provider.of<AuthenticationViewModel>(context, listen: false).myData;
+    final String? mainPhoto = myData?.mainPhoto;
+    final String name = myData?.name ?? '';
+    final int age = myData?.age ?? 0;
+    final String profileMessage = myData?.profileMessage ?? '';
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
@@ -61,13 +70,15 @@ class ProfilePreviewPageBody extends StatelessWidget {
                     ),
                   ),
                   height: 500,
-                  child: Hero(
-                    tag: "imageHero",
-                    child: Image.network(
-                      "https://pakutaso.cdn.rabify.me/shared/img/thumb/yumikoPAR52492.jpg.webp?d=1420",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  child: mainPhoto != null
+                      ? Hero(
+                          tag: "imageHero",
+                          child: Image.network(
+                            mainPhoto,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : null,
                 ),
               ),
               Padding(
@@ -76,21 +87,21 @@ class ProfilePreviewPageBody extends StatelessWidget {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Text(
-                          "チアキ",
-                          style: TextStyle(
+                          name,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
                         Text(
-                          "24歳",
-                          style: TextStyle(
+                          '$age歳',
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -101,9 +112,9 @@ class ProfilePreviewPageBody extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    const Text(
-                      "はじめまして！プロフィールを見ていただきありがとうございます\n都内の商社で営業事務をしている〇〇（名前）といいます。\n女性が多い職場でなかなか出会いがなく、思い切って登録してみました！\n休日はヨガに行って汗を流したり、料理をしたりして過ごしています。\n（最近はチョコケーキを極めるのにハマっています！）\nあと、国内外問わず旅行も大好きです！\n音楽は邦ロックが好きで、夏には友達とフェスに参戦したりしています♪\n邦ロック以外もいろいろ聴くので、おすすめの音楽があればぜひ教えてください(*’ω’*)\n性格はおっとりしていると言われることが多いですが、自分ではやるときはやる性格だと思っています\n恋人とはお互いの趣味を共有し合ったり、自然体でいられる関係が理想です\nまずは気軽にカフェなどでお話できたら嬉しいです。そうぞよろしくお願いします！",
-                      style: TextStyle(
+                    Text(
+                      profileMessage,
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                       maxLines: 3,
@@ -158,6 +169,12 @@ class PreviewDetailsPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+    final MyData? myData =
+        Provider.of<AuthenticationViewModel>(context, listen: false).myData;
+    final String? mainPhoto = myData?.mainPhoto;
+    final String name = myData?.name ?? '';
+    final int age = myData?.age ?? 0;
+    final String profileMessage = myData?.profileMessage ?? '';
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -165,13 +182,15 @@ class PreviewDetailsPageBody extends StatelessWidget {
             children: [
               SizedBox(
                 height: 400,
-                child: Hero(
-                  tag: "imageHero",
-                  child: Image.network(
-                    "https://pakutaso.cdn.rabify.me/shared/img/thumb/yumikoPAR52492.jpg.webp?d=1420",
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                child: mainPhoto != null
+                    ? Hero(
+                        tag: "imageHero",
+                        child: Image.network(
+                          mainPhoto,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : null,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -208,41 +227,41 @@ class PreviewDetailsPageBody extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
-                  "チアキ",
-                  style: TextStyle(
+                  name,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Text(
-                  "24歳",
-                  style: TextStyle(
+                  '$age歳',
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
-                Text(
+                const Text(
                   "自己紹介",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Text(
-                  "はじめまして！プロフィールを見ていただきありがとうございます\n都内の商社で営業事務をしている〇〇（名前）といいます。\n女性が多い職場でなかなか出会いがなく、思い切って登録してみました！\n休日はヨガに行って汗を流したり、料理をしたりして過ごしています。\n（最近はチョコケーキを極めるのにハマっています！）\nあと、国内外問わず旅行も大好きです！\n音楽は邦ロックが好きで、夏には友達とフェスに参戦したりしています♪\n邦ロック以外もいろいろ聴くので、おすすめの音楽があればぜひ教えてください(*’ω’*)\n性格はおっとりしていると言われることが多いですが、自分ではやるときはやる性格だと思っています\n恋人とはお互いの趣味を共有し合ったり、自然体でいられる関係が理想です\nまずは気軽にカフェなどでお話できたら嬉しいです。そうぞよろしくお願いします！",
+                  profileMessage,
                 ),
               ],
             ),
