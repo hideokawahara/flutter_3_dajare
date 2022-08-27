@@ -4,6 +4,10 @@ import 'package:flutter_3_dajare/pages/favorite_list_page.dart';
 import 'package:flutter_3_dajare/pages/home_page.dart';
 import 'package:flutter_3_dajare/pages/message_list_page.dart';
 import 'package:flutter_3_dajare/pages/my_page.dart';
+import 'package:flutter_3_dajare/view_model/authentication_view_model.dart';
+import 'package:provider/provider.dart';
+
+import 'model/my_data.dart';
 
 class BottomTab extends StatelessWidget {
   BottomTab({Key? key}) : super(key: key);
@@ -27,14 +31,52 @@ class BottomTab extends StatelessWidget {
     ),
   };
 
+  final Map<Widget, BottomNavigationBarItem> maleAccountContents = {
+    const HomePage(): const BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'ホーム',
+    ),
+    const MessageListPage(): const BottomNavigationBarItem(
+      icon: Icon(Icons.messenger_outlined),
+      label: 'やりとり',
+    ),
+    const FavoriteListPage(): const BottomNavigationBarItem(
+      icon: Icon(Icons.local_post_office_outlined),
+      label: '投稿する',
+    ),
+    const MyPage(): const BottomNavigationBarItem(
+      icon: Icon(Icons.settings),
+      label: '設定',
+    ),
+  };
+
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pageWidgets = femaleAccountContents.entries
-        .map((femaleContent) => femaleContent.key)
-        .toList();
-    final List<BottomNavigationBarItem> tabItems = femaleAccountContents.entries
-        .map((femaleContent) => femaleContent.value)
-        .toList();
+    final List<Widget> pageWidgets;
+    final List<BottomNavigationBarItem> tabItems;
+    final Gender? gender =
+        Provider.of<AuthenticationViewModel>(context, listen: false)
+            .myData
+            ?.gender;
+    if (gender == Gender.female) {
+      pageWidgets = femaleAccountContents.entries
+          .map((femaleContent) => femaleContent.key)
+          .toList();
+      tabItems = femaleAccountContents.entries
+          .map((femaleContent) => femaleContent.value)
+          .toList();
+    } else if (gender == Gender.male) {
+      pageWidgets = maleAccountContents.entries
+          .map((femaleContent) => femaleContent.key)
+          .toList();
+      tabItems = maleAccountContents.entries
+          .map((femaleContent) => femaleContent.value)
+          .toList();
+    } else {
+      return const Center(
+        child: Text('ログイン失敗しました'),
+      );
+    }
 
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
