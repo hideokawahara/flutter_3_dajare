@@ -56,6 +56,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Shippori_Antique',
                     ),
                   ),
                 ),

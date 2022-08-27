@@ -72,6 +72,7 @@ class _FavoriteListPageBodyState extends State<FavoriteListPageBody> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Shippori_Antique',
                     ),
                   ),
                 ),
