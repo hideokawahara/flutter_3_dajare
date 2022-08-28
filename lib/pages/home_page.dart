@@ -2,26 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/pages/man_details_page.dart';
 import 'package:flutter_3_dajare/widgets/button.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class FemaleAccountHomePage extends StatelessWidget {
+  const FemaleAccountHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.white,
-      body: HomePageBody(),
+      body: FemaleAccountHomePageBody(),
     );
   }
 }
 
-class HomePageBody extends StatefulWidget {
-  const HomePageBody({Key? key}) : super(key: key);
+class FemaleAccountHomePageBody extends StatefulWidget {
+  const FemaleAccountHomePageBody({Key? key}) : super(key: key);
 
   @override
-  State<HomePageBody> createState() => _HomePageBodyState();
+  State<FemaleAccountHomePageBody> createState() =>
+      _FemaleAccountHomePageBodyState();
 }
 
-class _HomePageBodyState extends State<HomePageBody> {
+class _FemaleAccountHomePageBodyState extends State<FemaleAccountHomePageBody> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -13,7 +13,7 @@ class BottomTab extends StatelessWidget {
   BottomTab({Key? key}) : super(key: key);
 
   final Map<Widget, BottomNavigationBarItem> femaleAccountContents = {
-    const HomePage(): const BottomNavigationBarItem(
+    const FemaleAccountHomePage(): const BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: 'ホーム',
     ),
@@ -32,7 +32,7 @@ class BottomTab extends StatelessWidget {
   };
 
   final Map<Widget, BottomNavigationBarItem> maleAccountContents = {
-    const HomePage(): const BottomNavigationBarItem(
+    const FemaleAccountHomePage(): const BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: 'ホーム',
     ),
