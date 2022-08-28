@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/view_model/male_home_view_model.dart';
+import 'package:flutter_3_dajare/widgets/card.dart';
 import 'package:provider/provider.dart';
 
 class MaleAccountHomePage extends StatelessWidget {
@@ -212,129 +213,11 @@ class MaleAccountHomePageBody extends StatelessWidget {
                 itemCount: homeModel.femaleUserList.length,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext listContext, int index) {
-                  return Container(
-                    width: 200,
-                    margin: const EdgeInsets.only(right: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20.0),
-                      border: Border.all(color: Colors.black12),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black26,
-                          spreadRadius: 1.0,
-                          blurRadius: 10.0,
-                          offset: Offset(10, 10),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                ),
-                                child: Image.network(
-                                  homeModel.femaleUserList[index].mainPhoto,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  padding: const EdgeInsets.all(16.0),
-                                  foregroundDecoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: FractionalOffset.topCenter,
-                                      end: FractionalOffset.bottomCenter,
-                                      colors: [
-                                        Colors.black.withOpacity(0.0),
-                                        Colors.black.withOpacity(0.2),
-                                      ],
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        homeModel.femaleUserList[index].name,
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w800,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        '${homeModel.femaleUserList[index].age}歳',
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 8,
-                            left: 16,
-                            bottom: 16,
-                            right: 16,
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(
-                                        8,
-                                      ),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.energy_savings_leaf,
-                                          color: Colors.white,
-                                        ),
-                                        // Text(
-                                        //   homeModel
-                                        //       .femaleUserList[index].preference
-                                        //       .toString(),
-                                        //   style: const TextStyle(
-                                        //     fontSize: 12,
-                                        //     fontWeight: FontWeight.w400,
-                                        //     color: Colors.white,
-                                        //   ),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  return femaleCard(
+                    mainPhoto: homeModel.femaleUserList[index].mainPhoto,
+                    name: homeModel.femaleUserList[index].name,
+                    age: homeModel.femaleUserList[index].age,
+                    preference: homeModel.femaleUserList[index].preference,
                   );
                 },
               );
