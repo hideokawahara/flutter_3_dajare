@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../model/female_user.dart';
 import '../model/joke.dart';
 
 class MaleHomeViewModel extends ChangeNotifier {
@@ -7,6 +8,11 @@ class MaleHomeViewModel extends ChangeNotifier {
   final List<Joke> _popularJokeList = _dummyJokeList;
   List<Joke> get popularJokeList {
     return _popularJokeList;
+  }
+
+  final List<FemaleUser> _femaleUserList = _dummyFemaleUsers;
+  List<FemaleUser> get femaleUserList {
+    return _femaleUserList;
   }
 
   Future<void> fetchPopularJokeList() async {
@@ -52,5 +58,36 @@ List<Joke> _dummyJokeList = [
         'https://pakutaso.cdn.rabify.me/shared/img/thumb/ookawa_MKT4826-11759.jpg.webp?d=1420',
     contents: '小野小町、斧のコマネチ',
     likesCounts: 1027,
+  ),
+];
+
+List<FemaleUser> _dummyFemaleUsers = [
+  FemaleUser(
+    name: 'カナ',
+    age: 29,
+    mainPhoto:
+        'https://pakutaso.cdn.rabify.me/shared/img/thumb/yumikoPAR52492.jpg.webp?d=1420',
+    preference: Preference.black,
+  ),
+  FemaleUser(
+    name: 'ゆみ',
+    age: 22,
+    mainPhoto:
+        'https://pakutaso.cdn.rabify.me/shared/img/thumb/SAYAPAKU5347.jpg.webp?d=1420',
+    preference: Preference.vulgar,
+  ),
+  FemaleUser(
+    name: 'りなちー',
+    age: 30,
+    mainPhoto:
+        'https://pakutaso.cdn.rabify.me/shared/img/thumb/yuka16011215IMG_5574.jpg.webp?d=1420',
+    preference: Preference.black,
+  ),
+  FemaleUser(
+    name: 'ゆーり',
+    age: 24,
+    mainPhoto:
+        'https://pakutaso.cdn.rabify.me/shared/img/thumb/150912225700.jpg.webp?d=1420',
+    preference: Preference.intelligence,
   ),
 ];
