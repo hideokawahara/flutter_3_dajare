@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter_3_dajare/view_model/male_home_view_model.dart';
+import 'package:provider/provider.dart';
 
 class MaleAccountHomePage extends StatelessWidget {
   const MaleAccountHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.white,
-      body: MaleAccountHomePageBody(),
+    return ChangeNotifierProvider(
+      create: (_) => MaleHomeViewModel(),
+      child: const Scaffold(
+        backgroundColor: Colors.white,
+        body: MaleAccountHomePageBody(),
+      ),
     );
   }
 }
@@ -32,7 +36,7 @@ class MaleAccountHomePageBody extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
-            popularJokeListSection(),
+            popularJokeListSection(context),
             const SizedBox(
               height: 24,
             ),
@@ -43,7 +47,7 @@ class MaleAccountHomePageBody extends StatelessWidget {
     );
   }
 
-  Widget popularJokeListSection() {
+  Widget popularJokeListSection(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -59,108 +63,118 @@ class MaleAccountHomePageBody extends StatelessWidget {
         ),
         SizedBox(
           height: 300,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            itemCount: 6,
-            shrinkWrap: true,
-            itemBuilder: (BuildContext listContext, int index) {
-              int rank = index + 1;
-              return Container(
-                width: 200,
-                margin: const EdgeInsets.only(right: 16),
+          child:
+              Consumer<MaleHomeViewModel>(builder: (context, homeModel, child) {
+            if (homeModel.popularJokeList.isEmpty) {
+              return const Center(
+                child: Text('Jokeがありません'),
+              );
+            } else {
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all(color: Colors.black12),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      spreadRadius: 1.0,
-                      blurRadius: 10.0,
-                      offset: Offset(10, 10),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                itemCount: homeModel.popularJokeList.length,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext listContext, int index) {
+                  int rank = index + 1;
+                  return Container(
+                    width: 200,
+                    margin: const EdgeInsets.only(right: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all(color: Colors.black12),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black26,
+                          spreadRadius: 1.0,
+                          blurRadius: 10.0,
+                          offset: Offset(10, 10),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Row(
+                    child: Column(
                       children: [
-                        Text(
-                          '人気$rank位',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w800,
+                        Row(
+                          children: [
+                            Text(
+                              '人気$rank位',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            const Spacer(),
+                            const Icon(
+                              Icons.favorite_rounded,
+                              color: Colors.redAccent,
+                            ),
+                            Text(
+                              '${homeModel.popularJokeList[index].likesCounts}',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Divider(),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            homeModel.popularJokeList[index].contents,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Shippori_Antique',
+                            ),
                           ),
                         ),
                         const Spacer(),
-                        const Icon(
-                          Icons.favorite_rounded,
-                          color: Colors.redAccent,
-                        ),
-                        const Text(
-                          "63",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey,
+                        InkWell(
+                          onTap: () {},
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage: Image.network(
+                                  homeModel.popularJokeList[index].authorImage,
+                                  fit: BoxFit.cover,
+                                ).image,
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                homeModel.popularJokeList[index].authorName,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                '${homeModel.popularJokeList[index].authorAge}歳',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                    const Divider(),
-                    const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "駄洒落を言ったのはダジャレ",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Shippori_Antique',
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () {},
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundImage: Image.network(
-                              "https://pakutaso.cdn.rabify.me/shared/img/thumb/bakarizmPAR56935.jpg.webp?d=1420",
-                              fit: BoxFit.cover,
-                            ).image,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          const Text(
-                            "タロー",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          const Text(
-                            "26歳",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  );
+                },
               );
-            },
-          ),
+            }
+          }),
         ),
       ],
     );
