@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/pages/favorite_list_page.dart';
-import 'package:flutter_3_dajare/pages/home_page.dart';
+import 'package:flutter_3_dajare/pages/female_home_page.dart';
+import 'package:flutter_3_dajare/pages/male_home_page.dart';
 import 'package:flutter_3_dajare/pages/message_list_page.dart';
 import 'package:flutter_3_dajare/pages/my_page.dart';
 import 'package:flutter_3_dajare/view_model/authentication_view_model.dart';
@@ -32,7 +33,7 @@ class BottomTab extends StatelessWidget {
   };
 
   final Map<Widget, BottomNavigationBarItem> maleAccountContents = {
-    const FemaleAccountHomePage(): const BottomNavigationBarItem(
+    const MaleAccountHomePage(): const BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: 'ホーム',
     ),
