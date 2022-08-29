@@ -157,6 +157,7 @@ Widget femaleCard({
           child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   setPreferenceTag,
                 ],
