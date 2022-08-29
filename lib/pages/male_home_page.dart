@@ -79,99 +79,13 @@ class MaleAccountHomePageBody extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (BuildContext listContext, int index) {
                     int rank = index + 1;
-                    return Container(
-                      width: 200,
-                      margin: const EdgeInsets.only(right: 16),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20.0),
-                        border: Border.all(color: Colors.black12),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black26,
-                            spreadRadius: 1.0,
-                            blurRadius: 10.0,
-                            offset: Offset(10, 10),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                '人気$rank位',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
-                              const Spacer(),
-                              const Icon(
-                                Icons.favorite_rounded,
-                                color: Colors.redAccent,
-                              ),
-                              Text(
-                                '${homeModel.popularJokeList[index].likesCounts}',
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Divider(),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              homeModel.popularJokeList[index].contents,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Shippori_Antique',
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                          InkWell(
-                            onTap: () {},
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: Image.network(
-                                    homeModel
-                                        .popularJokeList[index].authorImage,
-                                    fit: BoxFit.cover,
-                                  ).image,
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  homeModel.popularJokeList[index].authorName,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  '${homeModel.popularJokeList[index].authorAge}歳',
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                    return jokeCard(
+                      rank: rank,
+                      likesCounts: homeModel.popularJokeList[index].likesCounts,
+                      contents: homeModel.popularJokeList[index].contents,
+                      authorImage: homeModel.popularJokeList[index].authorImage,
+                      authorName: homeModel.popularJokeList[index].authorName,
+                      authorAge: homeModel.popularJokeList[index].authorAge,
                     );
                   },
                 );
