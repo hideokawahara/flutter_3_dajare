@@ -7,12 +7,12 @@ class MaleHomeViewModel extends ChangeNotifier {
   //Todo: 修正する
   final List<Joke> _popularJokeList = _dummyJokeList;
   List<Joke> get popularJokeList {
-    return _popularJokeList;
+    return [..._popularJokeList];
   }
 
   final List<FemaleUser> _femaleUserList = _dummyFemaleUsers;
   List<FemaleUser> get femaleUserList {
-    return _femaleUserList;
+    return [..._femaleUserList];
   }
 
   Future<void> fetchPopularJokeList() async {
