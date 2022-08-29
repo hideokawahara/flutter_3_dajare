@@ -6,6 +6,7 @@ Widget femaleCard({
   required String name,
   required int age,
   required Preference preference,
+  EdgeInsetsGeometry? margin,
 }) {
   Widget _preferenceTag({
     required Icon icon,
@@ -72,7 +73,7 @@ Widget femaleCard({
 
   return Container(
     width: 200,
-    margin: const EdgeInsets.only(right: 16),
+    margin: margin,
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(20.0),

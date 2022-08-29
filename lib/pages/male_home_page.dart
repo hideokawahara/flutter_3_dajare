@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/pages/female_user_list_page.dart';
 import 'package:flutter_3_dajare/view_model/male_home_view_model.dart';
 import 'package:flutter_3_dajare/widgets/card.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,10 @@ class MaleAccountHomePageBody extends StatelessWidget {
               width: screenWidth,
               height: 200,
               color: Colors.redAccent,
+              child: Image.network(
+                'https://jsbs2012.jp/wp-content/uploads/pairs-model_20200731182254_2.jpg',
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(
               height: 24,
@@ -41,7 +46,7 @@ class MaleAccountHomePageBody extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
-            femaleUserListSection(),
+            femaleUserListSection(context),
           ],
         ),
       ),
@@ -97,15 +102,39 @@ class MaleAccountHomePageBody extends StatelessWidget {
     );
   }
 
-  Widget femaleUserListSection() {
+  Widget femaleUserListSection(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text(
-          'はじめたばかりの相手',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).push(
+                MaterialPageRoute(
+                  builder: (_) => const FemaleUserListPage(),
+                ),
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                SizedBox(
+                  height: 24,
+                  width: 24,
+                ),
+                Text(
+                  'はじめたばかりの相手',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(
@@ -132,6 +161,7 @@ class MaleAccountHomePageBody extends StatelessWidget {
                     name: homeModel.femaleUserList[index].name,
                     age: homeModel.femaleUserList[index].age,
                     preference: homeModel.femaleUserList[index].preference,
+                    margin: const EdgeInsets.only(right: 16),
                   );
                 },
               );
