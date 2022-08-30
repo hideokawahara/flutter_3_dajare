@@ -157,6 +157,8 @@ class MaleAccountHomePageBody extends StatelessWidget {
                 shrinkWrap: true,
                 itemBuilder: (BuildContext listContext, int index) {
                   return femaleCard(
+                    listContext,
+                    index: index,
                     mainPhoto: homeModel.femaleUserList[index].mainPhoto,
                     name: homeModel.femaleUserList[index].name,
                     age: homeModel.femaleUserList[index].age,

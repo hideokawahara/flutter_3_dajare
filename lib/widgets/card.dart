@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/model/female_user.dart';
 
-Widget femaleCard({
+import '../pages/female_details_page.dart';
+
+Widget femaleCard(
+  BuildContext context, {
+  required int index,
   required String mainPhoto,
   required String name,
   required int age,
@@ -71,101 +75,120 @@ Widget femaleCard({
       break;
   }
 
-  return Container(
-    width: 200,
-    margin: margin,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(20.0),
-      border: Border.all(color: Colors.black12),
-      boxShadow: const [
-        BoxShadow(
-          color: Colors.black26,
-          spreadRadius: 1.0,
-          blurRadius: 10.0,
-          offset: Offset(10, 10),
+  return InkWell(
+    onTap: () {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => FemaleDetailsPage(
+            index: index,
+            name: name,
+            age: age,
+            profileMessage: '',
+            mainPhoto: mainPhoto,
+            photoList: [],
+          ),
         ),
-      ],
-    ),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Expanded(
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+      );
+    },
+    child: Container(
+      width: 200,
+      margin: margin,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.0),
+        border: Border.all(color: Colors.black12),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            spreadRadius: 1.0,
+            blurRadius: 10.0,
+            offset: Offset(10, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  child: Hero(
+                    tag: 'femaleHero$index',
+                    child: Image.network(
+                      mainPhoto,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                child: Image.network(
-                  mainPhoto,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  padding: const EdgeInsets.all(16.0),
-                  foregroundDecoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: FractionalOffset.topCenter,
-                      end: FractionalOffset.bottomCenter,
-                      colors: [
-                        Colors.black.withOpacity(0.0),
-                        Colors.black.withOpacity(0.2),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    padding: const EdgeInsets.all(16.0),
+                    foregroundDecoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: FractionalOffset.topCenter,
+                        end: FractionalOffset.bottomCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.0),
+                          Colors.black.withOpacity(0.2),
+                        ],
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          name,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          '$age歳',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        name,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        '$age歳',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 8,
-            left: 16,
-            bottom: 16,
-            right: 16,
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 8,
+              left: 16,
+              bottom: 16,
+              right: 16,
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    setPreferenceTag,
+                  ],
+                ),
+              ],
+            ),
           ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  setPreferenceTag,
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

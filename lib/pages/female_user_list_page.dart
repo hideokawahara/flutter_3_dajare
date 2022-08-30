@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/pages/female_details_page.dart';
 import 'package:flutter_3_dajare/view_model/female_user_list_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -60,6 +61,8 @@ class FemaleUserListPageBody extends StatelessWidget {
         itemCount: userModel.femaleList.length,
         itemBuilder: (context, index) {
           return femaleCard(
+            context,
+            index: index,
             mainPhoto: userModel.femaleList[index].mainPhoto,
             name: userModel.femaleList[index].name,
             age: userModel.femaleList[index].age,
