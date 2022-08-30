@@ -9,6 +9,8 @@ Widget femaleCard(
   required String mainPhoto,
   required String name,
   required int age,
+  required String profileMessage,
+  required List<String> photoList,
   required Preference preference,
   EdgeInsetsGeometry? margin,
 }) {
@@ -77,15 +79,15 @@ Widget femaleCard(
 
   return InkWell(
     onTap: () {
-      Navigator.of(context).push(
+      Navigator.of(context, rootNavigator: true).push(
         MaterialPageRoute(
           builder: (_) => FemaleDetailsPage(
             index: index,
             name: name,
             age: age,
-            profileMessage: '',
+            profileMessage: profileMessage,
             mainPhoto: mainPhoto,
-            photoList: [],
+            photoList: photoList,
           ),
         ),
       );

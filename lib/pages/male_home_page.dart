@@ -162,6 +162,9 @@ class MaleAccountHomePageBody extends StatelessWidget {
                     mainPhoto: homeModel.femaleUserList[index].mainPhoto,
                     name: homeModel.femaleUserList[index].name,
                     age: homeModel.femaleUserList[index].age,
+                    profileMessage:
+                        homeModel.femaleUserList[index].profileMessage,
+                    photoList: homeModel.femaleUserList[index].photoList,
                     preference: homeModel.femaleUserList[index].preference,
                     margin: const EdgeInsets.only(right: 16),
                   );

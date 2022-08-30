@@ -66,6 +66,8 @@ class FemaleUserListPageBody extends StatelessWidget {
             mainPhoto: userModel.femaleList[index].mainPhoto,
             name: userModel.femaleList[index].name,
             age: userModel.femaleList[index].age,
+            profileMessage: userModel.femaleList[index].profileMessage,
+            photoList: userModel.femaleList[index].photoList,
             preference: userModel.femaleList[index].preference,
           );
         },

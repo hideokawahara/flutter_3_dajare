@@ -57,6 +57,7 @@ class FemaleDetailsPageBody extends StatelessWidget {
       children: [
         SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
                 children: [
