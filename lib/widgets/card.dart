@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/model/female_user.dart';
 
 import '../pages/female_details_page.dart';
+import 'button.dart';
 
 Widget femaleCard(
   BuildContext context, {
@@ -290,6 +291,56 @@ Widget jokeCard({
                 ),
               ),
             ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget noInfoJokeCard({
+  required BuildContext context,
+  required String contents,
+  required Function onTap,
+}) {
+  return Container(
+    height: 320,
+    margin: const EdgeInsets.only(bottom: 16),
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20.0),
+      border: Border.all(color: Colors.black12),
+      boxShadow: const [
+        BoxShadow(
+          color: Colors.black26,
+          spreadRadius: 1.0,
+          blurRadius: 10.0,
+          offset: Offset(10, 10),
+        ),
+      ],
+    ),
+    child: Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            contents,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Shippori_Antique',
+            ),
+          ),
+        ),
+        const Spacer(),
+        const Divider(),
+        Align(
+          alignment: Alignment.centerRight,
+          child: LikeButton(
+            onTap: () {
+              onTap();
+            },
           ),
         ),
       ],
