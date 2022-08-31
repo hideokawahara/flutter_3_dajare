@@ -31,52 +31,49 @@ class FemaleAccountHomePageBody extends StatefulWidget {
 class _FemaleAccountHomePageBodyState extends State<FemaleAccountHomePageBody> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Consumer<FemaleHomeViewModel>(
-        builder: (context, homeModel, child) {
-          return ListView.builder(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 24,
-            ),
-            itemCount: homeModel.list.length,
-            itemBuilder: (BuildContext listContext, int index) {
-              return noInfoJokeCard(
-                context: context,
-                contents: homeModel.list[index].contents,
-                onTap: () async {
-                  print("tap");
-                  BuildContext innerContext =
-                      context; // 内部の context を保持しておくためのもの
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) {
-                      innerContext =
-                          context; // builder で使われている context を innerContext に保存しておく
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
-                  );
-                  await Future.delayed(
-                    const Duration(
-                      milliseconds: 1000,
-                    ),
-                  );
-                  if (!mounted) return;
-                  Navigator.of(innerContext).pop();
-                  Navigator.of(context, rootNavigator: true).push(
-                    MaterialPageRoute(
-                      builder: (_) => const ManDetailsPage(),
-                    ),
-                  );
-                },
-              );
-            },
-          );
-        },
-      ),
+    return Consumer<FemaleHomeViewModel>(
+      builder: (context, homeModel, child) {
+        return ListView.builder(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 48,
+          ),
+          itemCount: homeModel.list.length,
+          itemBuilder: (BuildContext listContext, int index) {
+            return noInfoJokeCard(
+              context: context,
+              contents: homeModel.list[index].contents,
+              onTap: () async {
+                print("tap");
+                BuildContext innerContext = context; // 内部の context を保持しておくためのもの
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    innerContext =
+                        context; // builder で使われている context を innerContext に保存しておく
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                );
+                await Future.delayed(
+                  const Duration(
+                    milliseconds: 1000,
+                  ),
+                );
+                if (!mounted) return;
+                Navigator.of(innerContext).pop();
+                Navigator.of(context, rootNavigator: true).push(
+                  MaterialPageRoute(
+                    builder: (_) => const ManDetailsPage(),
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
     );
   }
 }
