@@ -176,7 +176,7 @@ class InputJokePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double sreenWidth = MediaQuery.of(context).size.width;
+    final double screenWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Column(
         children: [
@@ -187,7 +187,7 @@ class InputJokePageBody extends StatelessWidget {
                 horizontal: 16,
               ),
               // height: 200,
-              width: sreenWidth,
+              width: screenWidth,
               decoration: BoxDecoration(
                 color: Colors.redAccent,
                 borderRadius: BorderRadius.circular(20),
