@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/view_model/joke_posts_view_model.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class JokePostsPage extends StatelessWidget {
@@ -28,7 +30,21 @@ class JokePostsPage extends StatelessWidget {
           child: const Icon(
             Icons.add,
           ),
-          onPressed: () {},
+          onPressed: () {
+            _showJokePostsScreen(context);
+          },
+        ),
+      ),
+    );
+  }
+
+  void _showJokePostsScreen(BuildContext context) {
+    showCupertinoModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      builder: (context) => Navigator(
+        onGenerateRoute: (context) => MaterialPageRoute<InputJokePage>(
+          builder: (context) => const InputJokePage(),
         ),
       ),
     );
@@ -115,6 +131,80 @@ class JokePostsPageBody extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class InputJokePage extends StatelessWidget {
+  const InputJokePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Text(
+          'クーポン',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+          icon: const Icon(
+            Icons.close,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      body: const InputJokePageBody(),
+    );
+  }
+}
+
+class InputJokePageBody extends StatelessWidget {
+  const InputJokePageBody({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final double sreenWidth = MediaQuery.of(context).size.width;
+    return SafeArea(
+      child: Column(
+        children: [
+          const Spacer(),
+          InkWell(
+            child: Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              // height: 200,
+              width: sreenWidth,
+              decoration: BoxDecoration(
+                color: Colors.redAccent,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 12,
+              ),
+              alignment: Alignment.center,
+              child: const Text(
+                '投稿する',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ),
         ],
