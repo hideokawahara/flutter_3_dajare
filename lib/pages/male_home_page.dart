@@ -84,7 +84,7 @@ class MaleAccountHomePageBody extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (BuildContext listContext, int index) {
                     int rank = index + 1;
-                    return jokeCard(
+                    return JokeCard(
                       rank: rank,
                       likesCounts: homeModel.popularJokeList[index].likesCounts,
                       contents: homeModel.popularJokeList[index].contents,
