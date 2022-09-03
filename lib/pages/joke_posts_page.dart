@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/utility/dialog.dart';
+import 'package:flutter_3_dajare/utility/progress_function.dart';
 import 'package:flutter_3_dajare/view_model/joke_posts_view_model.dart';
 import 'package:flutter_3_dajare/widgets/button.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
-
+import '../utility/check_result.dart';
 import '../widgets/text_form.dart';
 
 class JokePostsPage extends StatelessWidget {
@@ -33,16 +34,24 @@ class JokePostsPage extends StatelessWidget {
           child: const Icon(
             Icons.add,
           ),
-          onPressed: () {
-            _showJokePostsScreen(context);
+          onPressed: () async {
+            Map<String, dynamic>? result = await _showJokePostsScreen(context);
+            print('check the result $result');
+            if (isValidResult(
+              result: result,
+              keyValue: 'update',
+            )) {
+              print('calll fetch func');
+            }
           },
         ),
       ),
     );
   }
 
-  void _showJokePostsScreen(BuildContext context) {
-    showCupertinoModalBottomSheet(
+  Future<Map<String, dynamic>?> _showJokePostsScreen(
+      BuildContext context) async {
+    return await showCupertinoModalBottomSheet(
       context: context,
       useRootNavigator: true,
       builder: (context) => Navigator(
@@ -173,17 +182,21 @@ class InputJokePage extends StatelessWidget {
               ),
             ),
           ),
-          body: InputJokePageBody(),
+          body: const InputJokePageBody(),
         ),
       ),
     );
   }
 }
 
-class InputJokePageBody extends StatelessWidget {
-  InputJokePageBody({Key? key}) : super(key: key);
-  final controller = TextEditingController();
+class InputJokePageBody extends StatefulWidget {
+  const InputJokePageBody({Key? key}) : super(key: key);
 
+  @override
+  State<InputJokePageBody> createState() => _InputJokePageBodyState();
+}
+
+class _InputJokePageBodyState extends State<InputJokePageBody> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -202,6 +215,27 @@ class InputJokePageBody extends StatelessWidget {
               return JokePostButton(
                 isActivate: jokePostModel.jokeText.isNotEmpty,
                 width: screenWidth,
+                onTap: () async {
+                  bool result = await functionUseProgressIndicator(
+                    context: context,
+                    function: () => jokePostModel.postJoke(),
+                  );
+                  if (result) {
+                    await showResultDialog(
+                      context: context,
+                      dialogText: '投稿しました',
+                    );
+                    if (!mounted) return;
+                    Navigator.of(context, rootNavigator: true).pop(
+                      {'update': true},
+                    );
+                  } else {
+                    await showResultDialog(
+                      context: context,
+                      dialogText: '投稿に失敗しました',
+                    );
+                  }
+                },
               );
             } else {
               return JokePostButton(

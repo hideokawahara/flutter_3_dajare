@@ -15,10 +15,14 @@ class JokePostsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void setJokeText(String setText) {
-  //   _jokeText = setText;
-  //   notifyListeners();
-  // }
+  Future<bool> postJoke() async {
+    await Future.delayed(
+      const Duration(
+        milliseconds: 1000,
+      ),
+    );
+    return true;
+  }
 }
 
 List<Joke> _dummyJokeList = [
