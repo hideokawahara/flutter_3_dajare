@@ -347,3 +347,77 @@ Widget noInfoJokeCard({
     ),
   );
 }
+
+class MyJokeCard extends StatelessWidget {
+  const MyJokeCard({
+    Key? key,
+    required this.contents,
+    required this.likesCounts,
+  }) : super(key: key);
+  final String contents;
+  final int likesCounts;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.0),
+        border: Border.all(color: Colors.black12),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            spreadRadius: 1.0,
+            blurRadius: 10.0,
+            offset: Offset(10, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          const Align(
+            alignment: Alignment.centerRight,
+            child: Icon(
+              Icons.more_horiz,
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              contents,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Shippori_Antique',
+              ),
+            ),
+          ),
+          const Divider(),
+          InkWell(
+            onTap: () {},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Icon(
+                  Icons.favorite_rounded,
+                  color: Colors.redAccent,
+                ),
+                Text(
+                  '$likesCounts',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
