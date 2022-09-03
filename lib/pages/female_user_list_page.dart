@@ -60,8 +60,7 @@ class FemaleUserListPageBody extends StatelessWidget {
         ),
         itemCount: userModel.femaleList.length,
         itemBuilder: (context, index) {
-          return femaleCard(
-            context,
+          return FemaleCard(
             index: index,
             mainPhoto: userModel.femaleList[index].mainPhoto,
             name: userModel.femaleList[index].name,
