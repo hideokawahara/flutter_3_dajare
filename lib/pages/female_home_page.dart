@@ -40,8 +40,7 @@ class _FemaleAccountHomePageBodyState extends State<FemaleAccountHomePageBody> {
           ),
           itemCount: homeModel.list.length,
           itemBuilder: (BuildContext listContext, int index) {
-            return noInfoJokeCard(
-              context: context,
+            return NoInfoJokeCard(
               contents: homeModel.list[index].contents,
               onTap: () async {
                 print("tap");
