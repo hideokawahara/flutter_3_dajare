@@ -7,6 +7,18 @@ class JokePostsViewModel extends ChangeNotifier {
   List<Joke> get myJokeList {
     return [..._myJokeList];
   }
+
+  String _jokeText = '';
+  String get jokeText => _jokeText;
+  set jokeText(String setText) {
+    _jokeText = setText;
+    notifyListeners();
+  }
+
+  // void setJokeText(String setText) {
+  //   _jokeText = setText;
+  //   notifyListeners();
+  // }
 }
 
 List<Joke> _dummyJokeList = [
