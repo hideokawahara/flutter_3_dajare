@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/pages/profile_preview_page.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../view_model/authentication_view_model.dart';
 
 class PhotoEditPage extends StatelessWidget {
@@ -56,6 +56,7 @@ class PhotoEditPage extends StatelessWidget {
 
 class PhotoEditPageBody extends StatelessWidget {
   const PhotoEditPageBody({Key? key}) : super(key: key);
+  final int maximumPhotoLength = 8;
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +64,20 @@ class PhotoEditPageBody extends StatelessWidget {
         builder: (context, authModel, child) {
       //Todo: 取得方法を修正する
       final String? mainPhoto = authModel.myData?.mainPhoto;
-      final String? secondPhoto = authModel.myData?.photoList[0];
-      final String? thirdPhoto = authModel.myData?.photoList[1];
-      final String? fourthPhoto = authModel.myData?.photoList[2];
-      final String? fifthPhoto = authModel.myData?.photoList[3];
-      final String? sixthPhoto = authModel.myData?.photoList[4];
+      final List<Widget> setGridList = [];
+      setGridList.add(
+        createMainPhotoCell(mainPhoto),
+      );
+      List<Widget>? setPhotoList =
+          createPhotoCellList(authModel.myData?.photoList);
+      setGridList.addAll(setPhotoList ?? []);
+      setGridList.addAll(
+        createUndefinedPhotoCellList(
+              maximumLength: maximumPhotoLength,
+              photoListLength: authModel.myData?.photoList.length ?? 0,
+            ) ??
+            [],
+      );
       return Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -76,114 +86,11 @@ class PhotoEditPageBody extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 216,
-                  height: 216,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: mainPhoto != null
-                        ? Image.network(
-                            mainPhoto,
-                            fit: BoxFit.cover,
-                          )
-                        : null,
-                  ),
-                ),
-                Column(
-                  children: [
-                    secondPhoto != null
-                        ? SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(25),
-                              child: Image.network(
-                                secondPhoto,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          )
-                        : noPhotoCell(),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    thirdPhoto != null
-                        ? SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(25),
-                              child: Image.network(
-                                thirdPhoto,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          )
-                        : noPhotoCell(),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                fourthPhoto != null
-                    ? SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: Image.network(
-                            fourthPhoto,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      )
-                    : noPhotoCell(),
-                fifthPhoto != null
-                    ? SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: Image.network(
-                            fifthPhoto,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      )
-                    : noPhotoCell(),
-                sixthPhoto != null
-                    ? SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: Image.network(
-                            sixthPhoto,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      )
-                    : noPhotoCell(),
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                noPhotoCell(),
-                noPhotoCell(),
-                noPhotoCell(),
-              ],
+            StaggeredGrid.count(
+              crossAxisCount: 3,
+              mainAxisSpacing: 4,
+              crossAxisSpacing: 4,
+              children: setGridList,
             ),
           ],
         ),
@@ -224,5 +131,77 @@ class PhotoEditPageBody extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget createMainPhotoCell(String? photo) {
+    return StaggeredGridTile.count(
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 2,
+      child: SizedBox(
+        width: 216,
+        height: 216,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(25),
+          child: photo != null
+              ? Image.network(
+                  photo,
+                  fit: BoxFit.cover,
+                )
+              : noPhotoCell(),
+        ),
+      ),
+    );
+  }
+
+  List<Widget>? createPhotoCellList(List<String>? photoList) {
+    return photoList?.map((String photo) {
+      return StaggeredGridTile.count(
+        crossAxisCellCount: 1,
+        mainAxisCellCount: 1,
+        child: SizedBox(
+          width: 100,
+          height: 100,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(25),
+            child: Image.network(
+              photo,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+  List<Widget>? createUndefinedPhotoCellList({
+    required int maximumLength,
+    required int photoListLength,
+  }) {
+    int checkDiffLength = maximumPhotoLength - photoListLength;
+    if (checkDiffLength == 0) {
+      return null;
+
+      /// 足りない分を生成
+    } else if (maximumPhotoLength > checkDiffLength && checkDiffLength > 0 ||
+
+        /// photoListが0だったとき
+        maximumPhotoLength == checkDiffLength) {
+      return List.generate(checkDiffLength, (_) {
+        return StaggeredGridTile.count(
+          crossAxisCellCount: 1,
+          mainAxisCellCount: 1,
+          child: SizedBox(
+            width: 100,
+            height: 100,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: noPhotoCell(),
+            ),
+          ),
+        );
+      });
+    } else {
+      return null;
+    }
   }
 }
