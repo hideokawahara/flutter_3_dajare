@@ -30,6 +30,7 @@ class MainApp extends StatelessWidget {
             ),
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
             ],
             supportedLocales: const [

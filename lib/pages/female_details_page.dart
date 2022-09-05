@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FemaleDetailsPage extends StatelessWidget {
   const FemaleDetailsPage({
@@ -183,10 +184,12 @@ class _ChangeableTopPhotoState extends State<ChangeableTopPhoto> {
     if (setPhotoList.isNotEmpty) {
       selectPhoto = setPhotoList[_imageIndex];
     }
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         SizedBox(
           height: widget.height,
+          width: screenWidth,
           child: selectPhoto != null
               ? Hero(
                   tag: widget.tag,
@@ -211,6 +214,7 @@ class _ChangeableTopPhotoState extends State<ChangeableTopPhoto> {
                   onTap: () {
                     print('tap! left!');
                     if (_imageIndex != 0) {
+                      HapticFeedback.heavyImpact();
                       setState(() {
                         _imageIndex = _imageIndex - 1;
                       });
@@ -227,6 +231,7 @@ class _ChangeableTopPhotoState extends State<ChangeableTopPhoto> {
                   onTap: () {
                     print('tap! right');
                     if (setPhotoList.length - 1 > _imageIndex) {
+                      HapticFeedback.heavyImpact();
                       setState(() {
                         _imageIndex = _imageIndex + 1;
                       });

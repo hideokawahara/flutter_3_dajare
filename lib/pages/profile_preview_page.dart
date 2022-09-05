@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_3_dajare/model/my_data.dart';
+import 'package:flutter_3_dajare/utility/set_image.dart';
 import 'package:flutter_3_dajare/view_model/authentication_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -305,17 +307,16 @@ class _ChangeableTopPhotoState extends State<ChangeableTopPhoto> {
     if (setPhotoList.isNotEmpty) {
       selectPhoto = setPhotoList[_imageIndex];
     }
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         SizedBox(
           height: widget.height,
+          width: screenWidth,
           child: selectPhoto != null
               ? Hero(
                   tag: widget.tag,
-                  child: Image.network(
-                    selectPhoto,
-                    fit: BoxFit.cover,
-                  ),
+                  child: setImage(selectPhoto),
                 )
               : null,
         ),
@@ -333,6 +334,7 @@ class _ChangeableTopPhotoState extends State<ChangeableTopPhoto> {
                   onTap: () {
                     print('tap! left!');
                     if (_imageIndex != 0) {
+                      HapticFeedback.heavyImpact();
                       setState(() {
                         _imageIndex = _imageIndex - 1;
                       });
@@ -349,6 +351,7 @@ class _ChangeableTopPhotoState extends State<ChangeableTopPhoto> {
                   onTap: () {
                     print('tap! right');
                     if (setPhotoList.length - 1 > _imageIndex) {
+                      HapticFeedback.heavyImpact();
                       setState(() {
                         _imageIndex = _imageIndex + 1;
                       });
