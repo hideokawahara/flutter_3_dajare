@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/pages/profile_preview_page.dart';
+import 'package:flutter_3_dajare/utility/image_picker_function.dart';
+import 'package:flutter_3_dajare/utility/set_image.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../view_model/authentication_view_model.dart';
@@ -66,7 +70,10 @@ class PhotoEditPageBody extends StatelessWidget {
       final String? mainPhoto = authModel.myData?.mainPhoto;
       final List<Widget> setGridList = [];
       setGridList.add(
-        createMainPhotoCell(mainPhoto),
+        createMainPhotoCell(
+          photo: mainPhoto,
+          context: context,
+        ),
       );
       List<Widget>? setPhotoList =
           createPhotoCellList(authModel.myData?.photoList);
@@ -75,6 +82,7 @@ class PhotoEditPageBody extends StatelessWidget {
         createUndefinedPhotoCellList(
               maximumLength: maximumPhotoLength,
               photoListLength: authModel.myData?.photoList.length ?? 0,
+              context: context,
             ) ??
             [],
       );
@@ -98,42 +106,55 @@ class PhotoEditPageBody extends StatelessWidget {
     });
   }
 
-  Widget noPhotoCell() {
-    return SizedBox(
-      width: 100,
-      height: 100,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(25),
-        child: Stack(
-          alignment: Alignment.topRight,
-          children: [
-            Container(
-              color: Colors.grey[350],
-            ),
-            Container(
-              height: 25,
-              width: 25,
-              margin: const EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: 8,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Icon(
-                Icons.add,
+  Widget noPhotoCell(BuildContext context) {
+    var authModel =
+        Provider.of<AuthenticationViewModel>(context, listen: false);
+    return InkWell(
+      onTap: () async {
+        File? file = await getPhotoFromLibrary();
+        if (file != null) {
+          authModel.addPhoto(file);
+        }
+      },
+      child: SizedBox(
+        width: 100,
+        height: 100,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(25),
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              Container(
                 color: Colors.grey[350],
-                size: 25,
               ),
-            )
-          ],
+              Container(
+                height: 25,
+                width: 25,
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Icon(
+                  Icons.add,
+                  color: Colors.grey[350],
+                  size: 25,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget createMainPhotoCell(String? photo) {
+  Widget createMainPhotoCell({
+    required String? photo,
+    required BuildContext context,
+  }) {
     return StaggeredGridTile.count(
       crossAxisCellCount: 2,
       mainAxisCellCount: 2,
@@ -147,7 +168,7 @@ class PhotoEditPageBody extends StatelessWidget {
                   photo,
                   fit: BoxFit.cover,
                 )
-              : noPhotoCell(),
+              : noPhotoCell(context),
         ),
       ),
     );
@@ -155,6 +176,7 @@ class PhotoEditPageBody extends StatelessWidget {
 
   List<Widget>? createPhotoCellList(List<String>? photoList) {
     return photoList?.map((String photo) {
+      Widget image = setImage(photo);
       return StaggeredGridTile.count(
         crossAxisCellCount: 1,
         mainAxisCellCount: 1,
@@ -163,10 +185,7 @@ class PhotoEditPageBody extends StatelessWidget {
           height: 100,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(25),
-            child: Image.network(
-              photo,
-              fit: BoxFit.cover,
-            ),
+            child: image,
           ),
         ),
       );
@@ -176,6 +195,7 @@ class PhotoEditPageBody extends StatelessWidget {
   List<Widget>? createUndefinedPhotoCellList({
     required int maximumLength,
     required int photoListLength,
+    required BuildContext context,
   }) {
     int checkDiffLength = maximumPhotoLength - photoListLength;
     if (checkDiffLength == 0) {
@@ -195,7 +215,7 @@ class PhotoEditPageBody extends StatelessWidget {
             height: 100,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25),
-              child: noPhotoCell(),
+              child: noPhotoCell(context),
             ),
           ),
         );

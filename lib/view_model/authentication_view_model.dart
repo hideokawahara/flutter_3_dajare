@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_3_dajare/model/my_data.dart';
 import 'package:flutter_3_dajare/repository/auth_repository.dart';
@@ -22,6 +24,15 @@ class AuthenticationViewModel extends ChangeNotifier {
       return true;
     } else {
       return false;
+    }
+  }
+
+  void addPhoto(File file) {
+    if (_myData != null) {
+      _myData!.photoList.add(file.path);
+      notifyListeners();
+    } else {
+      return;
     }
   }
 }
