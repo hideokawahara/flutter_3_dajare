@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/pages/profile_preview_page.dart';
 import 'package:flutter_3_dajare/utility/image_picker_function.dart';
+import 'package:flutter_3_dajare/utility/modal_popup.dart';
 import 'package:flutter_3_dajare/utility/set_image.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -111,7 +112,7 @@ class PhotoEditPageBody extends StatelessWidget {
         Provider.of<AuthenticationViewModel>(context, listen: false);
     return InkWell(
       onTap: () async {
-        File? file = await getPhotoFromLibrary();
+        File? file = await showGetImagePopUp(context: context);
         if (file != null) {
           authModel.addPhoto(file);
         }
