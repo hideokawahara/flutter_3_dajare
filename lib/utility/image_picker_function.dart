@@ -10,3 +10,13 @@ Future<File?> getPhotoFromLibrary() async {
     return null;
   }
 }
+
+Future<File?> getPhotoFromCamera() async {
+  final picker = ImagePicker();
+  final XFile? image = await picker.pickImage(source: ImageSource.camera);
+  if (image != null) {
+    return File(image.path);
+  } else {
+    return null;
+  }
+}

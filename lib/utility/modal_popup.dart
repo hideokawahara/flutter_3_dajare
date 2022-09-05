@@ -46,7 +46,7 @@ Future<File?> showGetImagePopUp({required BuildContext context}) async {
   } else if (result == Photo.library) {
     return await getPhotoFromLibrary();
   } else if (result == Photo.camera) {
-    return null;
+    return await getPhotoFromCamera();
   } else {
     return null;
   }
