@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/bottom_tab.dart';
 import 'package:flutter_3_dajare/view_model/authentication_view_model.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -27,6 +28,15 @@ class MainApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale("en"),
+              Locale("ja"),
+            ],
+            locale: const Locale('ja', 'JP'),
             initialRoute: '/home',
             routes: {
               '/home': (_) => BottomTab(),
