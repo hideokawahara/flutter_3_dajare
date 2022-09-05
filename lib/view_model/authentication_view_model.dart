@@ -35,4 +35,13 @@ class AuthenticationViewModel extends ChangeNotifier {
       return;
     }
   }
+
+  void deletePhoto(String photo) {
+    if (_myData != null) {
+      _myData!.photoList.remove(photo);
+      notifyListeners();
+    } else {
+      return;
+    }
+  }
 }

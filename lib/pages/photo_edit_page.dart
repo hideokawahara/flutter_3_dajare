@@ -76,8 +76,10 @@ class PhotoEditPageBody extends StatelessWidget {
           context: context,
         ),
       );
-      List<Widget>? setPhotoList =
-          createPhotoCellList(authModel.myData?.photoList);
+      List<Widget>? setPhotoList = createPhotoCellList(
+        context: context,
+        photoList: authModel.myData?.photoList,
+      );
       setGridList.addAll(setPhotoList ?? []);
       setGridList.addAll(
         createUndefinedPhotoCellList(
@@ -175,18 +177,31 @@ class PhotoEditPageBody extends StatelessWidget {
     );
   }
 
-  List<Widget>? createPhotoCellList(List<String>? photoList) {
+  List<Widget>? createPhotoCellList({
+    required BuildContext context,
+    required List<String>? photoList,
+  }) {
+    var authModel =
+        Provider.of<AuthenticationViewModel>(context, listen: false);
     return photoList?.map((String photo) {
       Widget image = setImage(photo);
       return StaggeredGridTile.count(
         crossAxisCellCount: 1,
         mainAxisCellCount: 1,
-        child: SizedBox(
-          width: 100,
-          height: 100,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(25),
-            child: image,
+        child: InkWell(
+          onTap: () async {
+            bool? result = await deleteImagePopUp(context: context);
+            if (result != null && result) {
+              authModel.deletePhoto(photo);
+            }
+          },
+          child: SizedBox(
+            width: 100,
+            height: 100,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: image,
+            ),
           ),
         ),
       );

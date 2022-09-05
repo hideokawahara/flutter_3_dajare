@@ -44,12 +44,39 @@ Future<File?> showGetImagePopUp({required BuildContext context}) async {
   if (result == null) {
     return null;
   } else if (result == Photo.library) {
-    print('lib');
     return await getPhotoFromLibrary();
   } else if (result == Photo.camera) {
-    print('camera');
     return null;
   } else {
     return null;
   }
+}
+
+Future<bool?> deleteImagePopUp({required BuildContext context}) async {
+  bool? result = await showCupertinoModalPopup(
+    context: context,
+    builder: (BuildContext context) {
+      return CupertinoActionSheet(
+        actions: [
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: const Text(
+              '写真を削除する',
+            ),
+          ),
+        ],
+        cancelButton: CupertinoActionSheetAction(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text(
+            'キャンセル',
+          ),
+        ),
+      );
+    },
+  );
+  return result;
 }
