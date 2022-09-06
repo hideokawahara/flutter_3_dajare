@@ -11,7 +11,8 @@ class MyData {
   final int age;
   final Gender gender;
   final String profileMessage;
-  final String mainPhoto;
+  //Todo: 将来的にfinalにする
+  String mainPhoto;
   final List<String> photoList;
 
   factory MyData.fromJSON(Map<String, dynamic> json) {

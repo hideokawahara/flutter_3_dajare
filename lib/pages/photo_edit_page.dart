@@ -109,14 +109,21 @@ class PhotoEditPageBody extends StatelessWidget {
     });
   }
 
-  Widget noPhotoCell(BuildContext context) {
+  Widget noPhotoCell({
+    required BuildContext context,
+    bool isMain = false,
+  }) {
     var authModel =
         Provider.of<AuthenticationViewModel>(context, listen: false);
     return InkWell(
       onTap: () async {
         File? file = await showGetImagePopUp(context: context);
         if (file != null) {
-          authModel.addPhoto(file);
+          if (isMain) {
+            authModel.addMainPhoto(file);
+          } else {
+            authModel.addPhoto(file);
+          }
         }
       },
       child: SizedBox(
@@ -158,6 +165,26 @@ class PhotoEditPageBody extends StatelessWidget {
     required String? photo,
     required BuildContext context,
   }) {
+    var authModel =
+        Provider.of<AuthenticationViewModel>(context, listen: false);
+    final Widget image;
+    if (photo != null && photo.isNotEmpty) {
+      image = InkWell(
+        onTap: () async {
+          bool? result = await deleteImagePopUp(context: context);
+          if (result != null && result) {
+            authModel.deleteMainPhoto();
+          }
+        },
+        child: setImage(photo),
+      );
+    } else {
+      image = noPhotoCell(
+        context: context,
+        isMain: true,
+      );
+    }
+
     return StaggeredGridTile.count(
       crossAxisCellCount: 2,
       mainAxisCellCount: 2,
@@ -166,12 +193,7 @@ class PhotoEditPageBody extends StatelessWidget {
         height: 216,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(25),
-          child: photo != null
-              ? Image.network(
-                  photo,
-                  fit: BoxFit.cover,
-                )
-              : noPhotoCell(context),
+          child: image,
         ),
       ),
     );
@@ -231,7 +253,9 @@ class PhotoEditPageBody extends StatelessWidget {
             height: 100,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25),
-              child: noPhotoCell(context),
+              child: noPhotoCell(
+                context: context,
+              ),
             ),
           ),
         );

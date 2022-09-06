@@ -27,9 +27,27 @@ class AuthenticationViewModel extends ChangeNotifier {
     }
   }
 
+  void addMainPhoto(File file) {
+    if (_myData != null) {
+      _myData!.mainPhoto = file.path;
+      notifyListeners();
+    } else {
+      return;
+    }
+  }
+
   void addPhoto(File file) {
     if (_myData != null) {
       _myData!.photoList.add(file.path);
+      notifyListeners();
+    } else {
+      return;
+    }
+  }
+
+  void deleteMainPhoto() {
+    if (_myData != null) {
+      _myData!.mainPhoto = '';
       notifyListeners();
     } else {
       return;
