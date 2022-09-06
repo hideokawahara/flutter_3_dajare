@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/pages/photo_edit_page.dart';
+import 'package:flutter_3_dajare/utility/set_image.dart';
 import 'package:flutter_3_dajare/view_model/authentication_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,11 @@ class MyPageBody extends StatelessWidget {
       final int age = authModel.myData?.age ?? 0;
       final String profileMessage = authModel.myData?.profileMessage ?? '';
       final String? mainPhoto = authModel.myData?.mainPhoto;
+      //Todo: リファクタする
+      Image? image;
+      if (mainPhoto != null && mainPhoto.isNotEmpty) {
+        image = setImage(mainPhoto) as Image;
+      }
 
       return SingleChildScrollView(
         child: Column(
@@ -49,12 +55,7 @@ class MyPageBody extends StatelessWidget {
               alignment: Alignment.bottomRight,
               children: [
                 CircleAvatar(
-                  backgroundImage: mainPhoto != null
-                      ? Image.network(
-                          mainPhoto,
-                          fit: BoxFit.cover,
-                        ).image
-                      : null,
+                  backgroundImage: image?.image,
                   radius: 65,
                 ),
                 InkWell(
