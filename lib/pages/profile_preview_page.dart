@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_3_dajare/model/my_data.dart';
 import 'package:flutter_3_dajare/utility/set_image.dart';
 import 'package:flutter_3_dajare/view_model/authentication_view_model.dart';
+import 'package:flutter_3_dajare/widgets/icon.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePreviewPage extends StatelessWidget {
@@ -26,10 +27,7 @@ class ProfilePreviewPage extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pop();
           },
-          child: const Icon(
-            Icons.arrow_back_ios_rounded,
-            color: Colors.black,
-          ),
+          child: const BackArrowIcon(),
         ),
       ),
       body: const ProfilePreviewPageBody(),

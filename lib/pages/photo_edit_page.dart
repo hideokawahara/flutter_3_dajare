@@ -5,6 +5,7 @@ import 'package:flutter_3_dajare/pages/profile_preview_page.dart';
 import 'package:flutter_3_dajare/utility/image_picker_function.dart';
 import 'package:flutter_3_dajare/utility/modal_popup.dart';
 import 'package:flutter_3_dajare/utility/set_image.dart';
+import 'package:flutter_3_dajare/widgets/icon.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../view_model/authentication_view_model.dart';
@@ -30,10 +31,7 @@ class PhotoEditPage extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pop();
           },
-          child: const Icon(
-            Icons.arrow_back_ios_rounded,
-            color: Colors.black,
-          ),
+          child: const BackArrowIcon(),
         ),
         actions: [
           TextButton(

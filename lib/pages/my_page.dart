@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/pages/message_edit_page.dart';
 import 'package:flutter_3_dajare/pages/photo_edit_page.dart';
 import 'package:flutter_3_dajare/utility/set_image.dart';
 import 'package:flutter_3_dajare/view_model/authentication_view_model.dart';
@@ -109,6 +110,7 @@ class MyPageBody extends StatelessWidget {
               ],
             ),
             introduceSection(
+              context: context,
               profileMessage: profileMessage,
             ),
           ],
@@ -118,27 +120,37 @@ class MyPageBody extends StatelessWidget {
   }
 
   Widget introduceSection({
+    required BuildContext context,
     required String profileMessage,
   }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "自己紹介",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+    return InkWell(
+      onTap: () {
+        Navigator.of(context, rootNavigator: true).push(
+          MaterialPageRoute(
+            builder: (_) => const MessageEditPage(),
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              '自己紹介',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Text(
-            profileMessage,
-          )
-        ],
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              profileMessage,
+            )
+          ],
+        ),
       ),
     );
   }

@@ -4,6 +4,8 @@ import 'package:flutter_3_dajare/view_model/male_home_view_model.dart';
 import 'package:flutter_3_dajare/widgets/card.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/icon.dart';
+
 class MaleAccountHomePage extends StatelessWidget {
   const MaleAccountHomePage({Key? key}) : super(key: key);
 
@@ -130,9 +132,7 @@ class MaleAccountHomePageBody extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                ),
+                ForwardArrowIcon(),
               ],
             ),
           ),

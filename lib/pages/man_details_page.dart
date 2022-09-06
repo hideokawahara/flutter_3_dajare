@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/widgets/icon.dart';
 import '../widgets/button.dart';
 import 'chat_page.dart';
 
@@ -96,9 +97,7 @@ class ManDetailsPage extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 64, horizontal: 16),
               height: 50,
               width: 50,
-              child: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-              ),
+              child: const BackArrowIcon(),
             ),
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/pages/female_details_page.dart';
 import 'package:flutter_3_dajare/view_model/female_user_list_view_model.dart';
+import 'package:flutter_3_dajare/widgets/icon.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/card.dart';
@@ -28,10 +29,7 @@ class FemaleUserListPage extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
             },
-            child: const Icon(
-              Icons.arrow_back_ios_rounded,
-              color: Colors.black,
-            ),
+            child: const BackArrowIcon(),
           ),
         ),
         body: const FemaleUserListPageBody(),

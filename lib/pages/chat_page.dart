@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_3_dajare/widgets/icon.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -20,10 +21,7 @@ class ChatPage extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pop();
           },
-          child: const Icon(
-            Icons.arrow_back_ios_rounded,
-            color: Colors.black,
-          ),
+          child: const BackArrowIcon(),
         ),
       ),
       body: const ChatPageBody(),
