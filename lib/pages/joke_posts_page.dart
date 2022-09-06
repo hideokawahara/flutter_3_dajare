@@ -102,7 +102,7 @@ class InputJokePage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.white,
             title: const Text(
-              'クーポン',
+              '投稿',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 18,
