@@ -30,9 +30,14 @@ class MessageEditPage extends StatelessWidget {
   }
 }
 
-class MessageEditPageBody extends StatelessWidget {
+class MessageEditPageBody extends StatefulWidget {
   const MessageEditPageBody({Key? key}) : super(key: key);
 
+  @override
+  State<MessageEditPageBody> createState() => _MessageEditPageBodyState();
+}
+
+class _MessageEditPageBodyState extends State<MessageEditPageBody> {
   @override
   Widget build(BuildContext context) {
     return Container();
