@@ -45,6 +45,15 @@ class AuthenticationViewModel extends ChangeNotifier {
     }
   }
 
+  void addMessageText(String text) {
+    if (_myData != null) {
+      _myData!.profileMessage = text;
+      notifyListeners();
+    } else {
+      return;
+    }
+  }
+
   void deleteMainPhoto() {
     if (_myData != null) {
       _myData!.mainPhoto = '';
