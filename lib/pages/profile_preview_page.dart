@@ -73,10 +73,7 @@ class ProfilePreviewPageBody extends StatelessWidget {
                   child: mainPhoto != null
                       ? Hero(
                           tag: "imageHero",
-                          child: Image.network(
-                            mainPhoto,
-                            fit: BoxFit.cover,
-                          ),
+                          child: setImage(mainPhoto),
                         )
                       : null,
                 ),
