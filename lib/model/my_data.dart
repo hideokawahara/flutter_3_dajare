@@ -10,7 +10,7 @@ class MyData {
   final String name;
   final int age;
   final Gender gender;
-  final String profileMessage;
+  String profileMessage;
   //Todo: 将来的にfinalにする
   String mainPhoto;
   final List<String> photoList;
