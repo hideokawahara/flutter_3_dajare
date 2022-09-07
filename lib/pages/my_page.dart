@@ -123,6 +123,7 @@ class MyPageBody extends StatelessWidget {
     required BuildContext context,
     required String profileMessage,
   }) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
         Navigator.of(context, rootNavigator: true).push(
@@ -131,7 +132,8 @@ class MyPageBody extends StatelessWidget {
           ),
         );
       },
-      child: Padding(
+      child: Container(
+        width: screenWidth,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
