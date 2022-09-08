@@ -79,6 +79,7 @@ class MaleAccountHomePageBody extends StatelessWidget {
                 );
               } else {
                 return ListView.builder(
+                  clipBehavior: Clip.none,
                   scrollDirection: Axis.horizontal,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -150,6 +151,7 @@ class MaleAccountHomePageBody extends StatelessWidget {
                 );
               }
               return ListView.builder(
+                clipBehavior: Clip.none,
                 scrollDirection: Axis.horizontal,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
