@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_3_dajare/model/female_user.dart';
+import 'package:flutter_3_dajare/widgets/tag.dart';
 
 class FemaleDetailsPage extends StatelessWidget {
   const FemaleDetailsPage({
@@ -10,6 +12,7 @@ class FemaleDetailsPage extends StatelessWidget {
     required this.profileMessage,
     required this.mainPhoto,
     required this.photoList,
+    required this.preference,
   }) : super(key: key);
   final int index;
   final String name;
@@ -17,6 +20,7 @@ class FemaleDetailsPage extends StatelessWidget {
   final String profileMessage;
   final String mainPhoto;
   final List<String> photoList;
+  final Preference preference;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,7 @@ class FemaleDetailsPage extends StatelessWidget {
         profileMessage: profileMessage,
         mainPhoto: mainPhoto,
         photoList: photoList,
+        preference: preference,
       ),
     );
   }
@@ -43,6 +48,7 @@ class FemaleDetailsPageBody extends StatelessWidget {
     required this.profileMessage,
     required this.mainPhoto,
     required this.photoList,
+    required this.preference,
   }) : super(key: key);
   final int index;
   final String name;
@@ -50,6 +56,7 @@ class FemaleDetailsPageBody extends StatelessWidget {
   final String profileMessage;
   final String mainPhoto;
   final List<String> photoList;
+  final Preference preference;
 
   @override
   Widget build(BuildContext context) {
@@ -89,13 +96,24 @@ class FemaleDetailsPageBody extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          name,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Hero(
+                          tag: 'preferenceHero$index',
+                          child: PreferenceTag(
+                            preference: preference,
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(
                       height: 8,

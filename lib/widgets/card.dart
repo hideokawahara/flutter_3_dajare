@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/model/female_user.dart';
-
+import 'package:flutter_3_dajare/widgets/tag.dart';
 import '../pages/female_details_page.dart';
 import 'button.dart';
 
@@ -27,36 +27,6 @@ class FemaleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget setPreferenceTag;
-    switch (preference) {
-      case Preference.black:
-        setPreferenceTag = _preferenceTag(
-            icon: const Icon(
-              Icons.energy_savings_leaf,
-              color: Colors.white,
-            ),
-            preference: 'ブラック',
-            tagColor: Colors.black);
-        break;
-      case Preference.vulgar:
-        setPreferenceTag = _preferenceTag(
-            icon: const Icon(
-              Icons.no_adult_content,
-              color: Colors.white,
-            ),
-            preference: '下ネタ',
-            tagColor: Colors.pinkAccent);
-        break;
-      case Preference.intelligence:
-        setPreferenceTag = _preferenceTag(
-            icon: const Icon(
-              Icons.lightbulb,
-              color: Colors.white,
-            ),
-            preference: '知的',
-            tagColor: Colors.blueAccent);
-        break;
-    }
     return InkWell(
       onTap: () {
         Navigator.of(context, rootNavigator: true).push(
@@ -68,6 +38,7 @@ class FemaleCard extends StatelessWidget {
               profileMessage: profileMessage,
               mainPhoto: mainPhoto,
               photoList: photoList,
+              preference: preference,
             ),
           ),
         );
@@ -163,7 +134,12 @@ class FemaleCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      setPreferenceTag,
+                      Hero(
+                        tag: 'preferenceHero$index',
+                        child: PreferenceTag(
+                          preference: preference,
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -171,38 +147,6 @@ class FemaleCard extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _preferenceTag({
-    required Icon icon,
-    required String preference,
-    required Color tagColor,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: tagColor,
-        borderRadius: BorderRadius.circular(
-          10,
-        ),
-      ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 4,
-      ),
-      child: Row(
-        children: [
-          icon,
-          Text(
-            preference,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
-            ),
-          ),
-        ],
       ),
     );
   }
