@@ -21,6 +21,7 @@ class _JokeTextFormState extends State<JokeTextForm> {
         horizontal: 16,
       ),
       child: TextFormField(
+        autofocus: true,
         onChanged: (String value) {
           // widget.controller.text = value;
           widget.setTextCallback(value);
@@ -89,6 +90,7 @@ class _MessageTextFormState extends State<MessageTextForm> {
         horizontal: 16,
       ),
       child: TextFormField(
+        autofocus: true,
         onChanged: (String value) {
           widget.setTextCallback(value);
         },
