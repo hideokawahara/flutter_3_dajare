@@ -28,8 +28,8 @@ class BottomTab extends StatelessWidget {
       label: 'お気に入り',
     ),
     const MyPage(): const BottomNavigationBarItem(
-      icon: Icon(Icons.settings),
-      label: '設定',
+      icon: Icon(Icons.person),
+      label: 'マイページ',
     ),
   };
 
@@ -47,8 +47,8 @@ class BottomTab extends StatelessWidget {
       label: '投稿する',
     ),
     const MyPage(): const BottomNavigationBarItem(
-      icon: Icon(Icons.settings),
-      label: '設定',
+      icon: Icon(Icons.person),
+      label: 'マイページ',
     ),
   };
 
