@@ -65,6 +65,16 @@ class MainApp extends StatelessWidget {
               theme: ThemeData(
                 primarySwatch: Colors.blue,
               ),
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale("en"),
+                Locale("ja"),
+              ],
+              locale: const Locale('ja', 'JP'),
               initialRoute: initialRoute,
               routes: {
                 '/home': (_) => BottomTab(),
