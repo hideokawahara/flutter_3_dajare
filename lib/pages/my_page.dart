@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_3_dajare/pages/message_edit_page.dart';
 import 'package:flutter_3_dajare/pages/photo_edit_page.dart';
+import 'package:flutter_3_dajare/pages/settings_page.dart';
 import 'package:flutter_3_dajare/utility/set_image.dart';
 import 'package:flutter_3_dajare/view_model/authentication_view_model.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,19 @@ class MyPage extends StatelessWidget {
             color: Colors.black,
             fontSize: 18,
             fontWeight: FontWeight.bold,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).push(
+              MaterialPageRoute(
+                builder: (_) => const SettingsPage(),
+              ),
+            );
+          },
+          icon: const Icon(
+            Icons.settings,
+            color: Colors.black,
           ),
         ),
       ),
