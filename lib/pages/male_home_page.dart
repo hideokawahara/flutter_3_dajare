@@ -46,7 +46,7 @@ class MaleAccountHomePageBody extends StatelessWidget {
             ),
             popularJokeListSection(context),
             const SizedBox(
-              height: 24,
+              height: 8,
             ),
             femaleUserListSection(context),
           ],
@@ -109,16 +109,19 @@ class MaleAccountHomePageBody extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: InkWell(
-            onTap: () {
-              Navigator.of(context, rootNavigator: true).push(
-                MaterialPageRoute(
-                  builder: (_) => const FemaleUserListPage(),
-                ),
-              );
-            },
+        InkWell(
+          onTap: () {
+            Navigator.of(context, rootNavigator: true).push(
+              MaterialPageRoute(
+                builder: (_) => const FemaleUserListPage(),
+              ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 16,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -137,9 +140,6 @@ class MaleAccountHomePageBody extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        const SizedBox(
-          height: 16,
         ),
         SizedBox(
           height: 300,
