@@ -24,6 +24,7 @@ class SettingsPage extends StatelessWidget {
           icon: const BackArrowIcon(),
         ),
       ),
+      backgroundColor: Colors.grey[200],
       body: const SettingsPageBody(),
     );
   }
@@ -34,28 +35,53 @@ class SettingsPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    final double screenHeight = MediaQuery.of(context).size.height;
+    return Container(
+      height: screenHeight,
+      padding: const EdgeInsets.all(
+        16,
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ListTile(
-            leading: const Icon(
-              Icons.logout,
+          const Text(
+            '設定',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            title: Text('ログアウト'),
-            onTap: () {},
-            shape: Border(
-              bottom: BorderSide(color: Colors.grey),
-            ),
+          ),
+          const SizedBox(
+            height: 24,
           ),
           ListTile(
             leading: const Icon(
               Icons.logout,
             ),
-            title: Text('アカウント削除'),
-            onTap: () {},
-            shape: Border(
-              bottom: BorderSide(color: Colors.grey),
+            title: const Text(
+              'ログアウト',
             ),
+            onTap: () {},
+            shape: const Border(
+              bottom: BorderSide(
+                color: Colors.grey,
+              ),
+            ),
+            tileColor: Colors.white,
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.delete_forever,
+            ),
+            title: const Text('アカウント削除'),
+            onTap: () {},
+            shape: const Border(
+              bottom: BorderSide(
+                color: Colors.grey,
+              ),
+            ),
+            tileColor: Colors.white,
           ),
         ],
       ),
